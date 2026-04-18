@@ -8,6 +8,7 @@ __pycache__/
 
 # Files
 *.csv
+*.txt
 
 # AI
 .kilo/
