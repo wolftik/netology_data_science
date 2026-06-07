@@ -8,14 +8,15 @@ __pycache__/
 
 # Files
 *.csv
+*.tsv
+*.db
 *.txt
 *.xlsx
 
 # AI
 .kilo/
+.gigacode/
 
-# git
-.gitignore
 
 # Distribution / packaging
 .Python
