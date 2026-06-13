@@ -7,7 +7,7 @@ class LearningDatabase:
         self.conn = sqlite3.connect(db_path)
         self.cursor = self.conn.cursor()
         self._create_tables()
-    
+
     def _create_tables(self):
         # Таблица тем
         self.cursor.execute('''
@@ -19,7 +19,7 @@ class LearningDatabase:
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
-        
+
         # Таблица прогресса по темам
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS progress (
@@ -30,7 +30,7 @@ class LearningDatabase:
                 FOREIGN KEY (topic_id) REFERENCES topics(id)
             )
         ''')
-        
+
         # Таблица домашних заданий
         self.cursor.execute('''
             CREATE TABLE IF NOT EXISTS homeworks (
@@ -42,21 +42,21 @@ class LearningDatabase:
                 notes TEXT
             )
         ''')
-        
+
         self.conn.commit()
-    
+
     def add_topic(self, topic_name, category='datetime'):
         self.cursor.execute(
             'INSERT OR IGNORE INTO topics (topic_name, category) VALUES (?, ?)',
             (topic_name, category)
         )
         self.conn.commit()
-    
+
     def mark_completed(self, topic_name):
         cursor = self.conn.cursor()
         cursor.execute('SELECT id FROM topics WHERE topic_name = ?', (topic_name,))
         row = cursor.fetchone()
-        
+
         if row:
             topic_id = row[0]
             cursor.execute('''
@@ -64,15 +64,15 @@ class LearningDatabase:
                 VALUES (?, CURRENT_TIMESTAMP)
             ''', (topic_id,))
             self.conn.commit()
-    
+
     def add_completed_topic_with_skills(self, topic_name, skills, date=None):
         """Добавляет выполненную тему с записью освоённых навыков."""
         cursor = self.conn.cursor()
-        
+
         # Добавляем или получаем тему
         cursor.execute('SELECT id FROM topics WHERE topic_name = ?', (topic_name,))
         row = cursor.fetchone()
-        
+
         if not row:
             cursor.execute(
                 'INSERT INTO topics (topic_name, category, status) VALUES (?, ?, ?)',
@@ -82,40 +82,40 @@ class LearningDatabase:
             topic_id = cursor.lastrowid
         else:
             topic_id = row[0]
-        
+
         # Проверяем и добавляем колонку skills, если её нет
         cursor.execute("PRAGMA table_info(topics)")
         columns = [col[1] for col in cursor.fetchall()]
-        
+
         if 'skills' not in columns:
             self.cursor.execute('ALTER TABLE topics ADD COLUMN skills TEXT')
             self.conn.commit()
-        
+
         # Обновляем навыки для темы
         cursor.execute(
             'UPDATE topics SET skills = ? WHERE id = ?',
             (skills, topic_id)
         )
-        
+
         # Добавляем запись о завершении с указанной датой
         completion_date = date if date else CURRENT_TIMESTAMP
         cursor.execute('''
             INSERT OR IGNORE INTO progress (topic_id, completion_date) 
             VALUES (?, ?)
         ''', (topic_id, completion_date))
-        
+
         self.conn.commit()
-    
+
     def add_homework(self, file_name, topic_name, notes=None):
         self.cursor.execute(
             'INSERT OR REPLACE INTO homeworks (file_name, topic_name, status, notes) VALUES (?, ?, ?, ?)',
             (file_name, topic_name, 'completed', notes)
         )
         self.conn.commit()
-    
+
     def get_progress(self):
         cursor = self.conn.cursor()
-        
+
         # Статистика по категориям
         cursor.execute('''
             SELECT category, COUNT(*) as count 
@@ -123,7 +123,7 @@ class LearningDatabase:
             GROUP BY category
         ''')
         stats = dict(cursor.fetchall())
-        
+
         # Выполненные темы
         cursor.execute('''
             SELECT t.topic_name, p.completion_date, t.skills
@@ -131,20 +131,19 @@ class LearningDatabase:
             JOIN progress p ON t.id = p.topic_id
         ''')
         completed = list(cursor.fetchall())
-        
+
         return {
             'stats': stats,
             'completed': completed
         }
-    
+
     def get_homeworks(self):
         cursor = self.conn.cursor()
         cursor.execute('SELECT file_name, status FROM homeworks ORDER BY id')
         return cursor.fetchall()
-    
+
     def close(self):
         self.conn.close()
-
 
 # Инициализация базы данных и заполнение данными
 db = LearningDatabase()
@@ -173,11 +172,18 @@ db.add_completed_topic_with_skills(
     date='2026-06-07'
 )
 
+db.add_completed_topic_with_skills(
+    'Основы статистики-Исследование данных',
+    '',
+    date='2026-06-13'
+)
+
 # Добавляем домашние задания
 homeworks = [
     ('datatypes_cycles_1.ipynb', 'Python basics'),
     ('datatypes_cycles_2.ipynb', 'Datatypes and loops'),
-    ('functions_1.ipynb', 'Functions')
+    ('functions_1.ipynb', 'Functions'),
+    ('data_research.ipynb', 'Основы статистики-Исследование данных')
 ]
 
 for file_name, topic in homeworks:
