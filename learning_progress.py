@@ -82,6 +82,7 @@ class LearningDatabase:
             topic_id = cursor.lastrowid
         else:
             topic_id = row[0]
+            cursor.execute('UPDATE topics SET status = ? WHERE id = ?', ('completed', topic_id))
 
         # Проверяем и добавляем колонку skills, если её нет
         cursor.execute("PRAGMA table_info(topics)")
@@ -106,10 +107,10 @@ class LearningDatabase:
 
         self.conn.commit()
 
-    def add_homework(self, file_name, topic_name, notes=None):
+    def add_homework(self, file_name, topic_name, completed_at=None, notes=None):
         self.cursor.execute(
-            'INSERT OR REPLACE INTO homeworks (file_name, topic_name, status, notes) VALUES (?, ?, ?, ?)',
-            (file_name, topic_name, 'completed', notes)
+            'INSERT OR REPLACE INTO homeworks (file_name, topic_name, status, completed_at, notes) VALUES (?, ?, ?, ?, ?)',
+            (file_name, topic_name, 'completed', completed_at, notes)
         )
         self.conn.commit()
 
@@ -178,16 +179,25 @@ db.add_completed_topic_with_skills(
     date='2026-06-13'
 )
 
+db.add_completed_topic_with_skills(
+    'Работа с пропусками и переменными',
+    'missing value analysis, SimpleImputer median, IterativeImputer, MinMaxScaler, StandardScaler, OrdinalEncoder, OneHotEncoder, TargetEncoding, ROC-AUC validation',
+    date='2026-08-01'
+)
+
 # Добавляем домашние задания
 homeworks = [
     ('datatypes_cycles_1.ipynb', 'Python basics'),
     ('datatypes_cycles_2.ipynb', 'Datatypes and loops'),
     ('functions_1.ipynb', 'Functions'),
-    ('data_research.ipynb', 'Основы статистики-Исследование данных')
+    ('data_research.ipynb', 'Основы статистики-Исследование данных'),
+    ('HW_MissingValues_Student.ipynb', 'Работа с пропусками и переменными', '2026-08-01')
 ]
 
-for file_name, topic in homeworks:
-    db.add_homework(file_name, topic)
+for item in homeworks:
+    file_name, topic = item[0], item[1]
+    completed_at = item[2] if len(item) > 2 else None
+    db.add_homework(file_name, topic, completed_at=completed_at)
 
 # Вывод прогресса
 progress = db.get_progress()
