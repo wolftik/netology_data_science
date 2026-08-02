@@ -191,6 +191,12 @@ db.add_completed_topic_with_skills(
     date='2026-08-02'
 )
 
+db.add_completed_topic_with_skills(
+    'Feature Selection и PCA',
+    'correlation analysis, collinearity removal (free/total sulfur dioxide), SelectKBest (ROC-AUC 0.7949, 5 features), RFE (ROC-AUC 0.7971, 5 features), PCA (7 components, ROC-AUC 0.7892)',
+    date='2026-08-02'
+)
+
 # Добавляем домашние задания
 homeworks = [
     ('datatypes_cycles_1.ipynb', 'Python basics'),
@@ -198,7 +204,8 @@ homeworks = [
     ('functions_1.ipynb', 'Functions'),
     ('data_research.ipynb', 'Основы статистики-Исследование данных'),
     ('HW_MissingValues_Student.ipynb', 'Работа с пропусками и переменными', '2026-08-01'),
-    ('Outlier_detection_template.ipynb', 'Поиск выбросов (Outlier Detection)', '2026-08-02')
+    ('Outlier_detection_template.ipynb', 'Поиск выбросов (Outlier Detection)', '2026-08-02'),
+    ('ML_Feature_Selection_PCA.ipynb', 'ML.Генерация переменных и Feature selection', '2026-08-02')
 ]
 
 for item in homeworks:
