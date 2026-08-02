@@ -185,13 +185,20 @@ db.add_completed_topic_with_skills(
     date='2026-08-01'
 )
 
+db.add_completed_topic_with_skills(
+    'Поиск выбросов (Outlier Detection)',
+    'residuals 3-sigma threshold, OneClassSVM, IsolationForest, boxplot, LinearRegression',
+    date='2026-08-02'
+)
+
 # Добавляем домашние задания
 homeworks = [
     ('datatypes_cycles_1.ipynb', 'Python basics'),
     ('datatypes_cycles_2.ipynb', 'Datatypes and loops'),
     ('functions_1.ipynb', 'Functions'),
     ('data_research.ipynb', 'Основы статистики-Исследование данных'),
-    ('HW_MissingValues_Student.ipynb', 'Работа с пропусками и переменными', '2026-08-01')
+    ('HW_MissingValues_Student.ipynb', 'Работа с пропусками и переменными', '2026-08-01'),
+    ('Outlier_detection_template.ipynb', 'Поиск выбросов (Outlier Detection)', '2026-08-02')
 ]
 
 for item in homeworks:
