@@ -197,6 +197,25 @@ db.add_completed_topic_with_skills(
     date='2026-08-02'
 )
 
+db.add_completed_topic_with_skills(
+    'Деревья решений (Decision Trees)',
+    'DecisionTreeClassifier, plot_tree, feature_importances_, GridSearchCV, overfitting prevention, max_depth, min_samples_split, min_samples_leaf',
+    date='2026-08-20'
+)
+
+db.add_completed_topic_with_skills(
+    'Ансамблирование',
+    'bagging, RandomForestClassifier, AdaBoost, GradientBoosting, XGBoost, stacking, ensemble evaluation',
+    date='2026-08-22'
+)
+
+# Примечание о выполненном домашнем задании по ансамблированию
+db.cursor.execute('''
+    UPDATE progress SET notes = ?
+    WHERE topic_id = (SELECT id FROM topics WHERE topic_name = 'Ансамблирование')
+''', ('Домашнее задание выполнено: bagging, случайный лес, AdaBoost, Gradient Boosting, XGBoost, stacking (water_potability.csv)',))
+db.conn.commit()
+
 # Добавляем домашние задания
 homeworks = [
     ('datatypes_cycles_1.ipynb', 'Python basics'),
@@ -205,7 +224,9 @@ homeworks = [
     ('data_research.ipynb', 'Основы статистики-Исследование данных'),
     ('HW_MissingValues_Student.ipynb', 'Работа с пропусками и переменными', '2026-08-01'),
     ('Outlier_detection_template.ipynb', 'Поиск выбросов (Outlier Detection)', '2026-08-02'),
-    ('ML_Feature_Selection_PCA.ipynb', 'ML.Генерация переменных и Feature selection', '2026-08-02')
+    ('ML_Feature_Selection_PCA.ipynb', 'ML.Генерация переменных и Feature selection', '2026-08-02'),
+    ('HW_tree.ipynb', 'Деревья решений (Decision Trees)', '2026-08-20', 'Классификация: прогнозирование одобрения кредита (train.csv)'),
+    ('HW_ensebles.ipynb', 'Ансамблирование', '2026-08-22', 'water_potability.csv: bagging, случайный лес, AdaBoost, Gradient Boosting, XGBoost, stacking')
 ]
 
 for item in homeworks:
