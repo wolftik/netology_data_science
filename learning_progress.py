@@ -224,16 +224,16 @@ db.conn.commit()
 
 # Добавляем домашние задания
 homeworks = [
-    ('datatypes_cycles_1.ipynb', 'Python basics'),
-    ('datatypes_cycles_2.ipynb', 'Datatypes and loops'),
-    ('functions_1.ipynb', 'Functions'),
-    ('data_research.ipynb', 'Основы статистики-Исследование данных'),
-    ('HW_MissingValues_Student.ipynb', 'Работа с пропусками и переменными', '2026-08-01'),
-    ('Outlier_detection_template.ipynb', 'Поиск выбросов (Outlier Detection)', '2026-08-02'),
-    ('ML_Feature_Selection_PCA.ipynb', 'ML.Генерация переменных и Feature selection', '2026-08-02'),
-    ('HW_tree.ipynb', 'Деревья решений (Decision Trees)', '2026-08-20', 'Классификация: прогнозирование одобрения кредита (train.csv)'),
-    ('HW_ensebles.ipynb', 'Ансамблирование', '2026-08-22', 'water_potability.csv: bagging, случайный лес, AdaBoost, Gradient Boosting, XGBoost, stacking'),
-    ('hw_sms_spam_classification.ipynb', 'Работа со сложными данными (NLP)', '2026-09-12', 'SMS Spam Collection: preprocessing + TF-IDF + MultinomialNB (accuracy 0.9613, F1 0.8198)')
+    ('Темы/1. Основы Python/01. Основы Python/homework/homework.ipynb', 'Python basics'),
+    ('Темы/1. Основы Python/02. Типы данных и циклы/homework/homework.ipynb', 'Datatypes and loops'),
+    ('Темы/1. Основы Python/03. Функции/homework/homework.ipynb', 'Functions'),
+    ('Темы/2. Аналитика и статистика/05. Основы статистики. Исследование данных/homework/homework.ipynb', 'Основы статистики-Исследование данных'),
+    ('Темы/3. Машинное обучение и нейросети/08. Работа с пропусками и переменными/homework/homework.ipynb', 'Работа с пропусками и переменными', '2026-08-01'),
+    ('Темы/3. Машинное обучение и нейросети/09. Поиск выбросов/homework/homework.ipynb', 'Поиск выбросов (Outlier Detection)', '2026-08-02'),
+    ('Темы/3. Машинное обучение и нейросети/10. Генерация переменных и Feature selection/homework/homework.ipynb', 'ML.Генерация переменных и Feature selection', '2026-08-02'),
+    ('Темы/3. Машинное обучение и нейросети/03. Деревья решений/homework/homework.ipynb', 'Деревья решений (Decision Trees)', '2026-08-20', 'Классификация: прогнозирование одобрения кредита (train.csv)'),
+    ('Темы/3. Машинное обучение и нейросети/04. Ансамблирование/homework/homework.ipynb', 'Ансамблирование', '2026-08-22', 'water_potability.csv: bagging, случайный лес, AdaBoost, Gradient Boosting, XGBoost, stacking'),
+    ('Темы/3. Машинное обучение и нейросети/12. Работа со сложными данными/homework/homework.ipynb', 'Работа со сложными данными (NLP)', '2026-09-12', 'SMS Spam Collection: preprocessing + TF-IDF + MultinomialNB (accuracy 0.9613, F1 0.8198)')
 ]
 
 for item in homeworks:
