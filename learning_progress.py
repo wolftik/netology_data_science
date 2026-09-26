@@ -209,6 +209,12 @@ db.add_completed_topic_with_skills(
     date='2026-08-22'
 )
 
+db.add_completed_topic_with_skills(
+    'Работа со сложными данными (NLP)',
+    'tokenization, tokens/types/lexemes, text preprocessing, stopword removal, lemmatization, CountVectorizer, TF-IDF, MultinomialNB, classification_report',
+    date='2026-09-12'
+)
+
 # Примечание о выполненном домашнем задании по ансамблированию
 db.cursor.execute('''
     UPDATE progress SET notes = ?
@@ -226,7 +232,8 @@ homeworks = [
     ('Outlier_detection_template.ipynb', 'Поиск выбросов (Outlier Detection)', '2026-08-02'),
     ('ML_Feature_Selection_PCA.ipynb', 'ML.Генерация переменных и Feature selection', '2026-08-02'),
     ('HW_tree.ipynb', 'Деревья решений (Decision Trees)', '2026-08-20', 'Классификация: прогнозирование одобрения кредита (train.csv)'),
-    ('HW_ensebles.ipynb', 'Ансамблирование', '2026-08-22', 'water_potability.csv: bagging, случайный лес, AdaBoost, Gradient Boosting, XGBoost, stacking')
+    ('HW_ensebles.ipynb', 'Ансамблирование', '2026-08-22', 'water_potability.csv: bagging, случайный лес, AdaBoost, Gradient Boosting, XGBoost, stacking'),
+    ('hw_sms_spam_classification.ipynb', 'Работа со сложными данными (NLP)', '2026-09-12', 'SMS Spam Collection: preprocessing + TF-IDF + MultinomialNB (accuracy 0.9613, F1 0.8198)')
 ]
 
 for item in homeworks:
