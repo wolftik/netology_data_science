@@ -1,0 +1,10 @@
+[project]
+name = "netology-data-science"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = "==3.13.15"
+dependencies = [
+    "tensorflow>=2.21.0",
+    "tqdm>=4.70.1",
+]

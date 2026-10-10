@@ -215,6 +215,12 @@ db.add_completed_topic_with_skills(
     date='2026-09-12'
 )
 
+db.add_completed_topic_with_skills(
+    'Свёрточные нейронные сети (CNN)',
+    'CIFAR-10, Dense baseline (Flatten + Dense, sgd, test_acc 0.4578); pocket CNN (Conv2D 3x3, MaxPool2D, Flatten, Dense, test_acc 0.6022); big CNN (Conv2D 32/64, MaxPooling, Dropout, ImageDataGenerator augmentation, EarlyStopping/ModelCheckpoint, test_acc 0.7297, target 80% not reached); Sequential API, categorical_crossentropy + to_categorical; optional tasks (optimizers comparison, BatchNormalization, batch_size, learning curves) skipped',
+    date='2026-10-08'
+)
+
 # Примечание о выполненном домашнем задании по ансамблированию
 db.cursor.execute('''
     UPDATE progress SET notes = ?
@@ -233,7 +239,8 @@ homeworks = [
     ('Темы/3. Машинное обучение и нейросети/10. Генерация переменных и Feature selection/homework/homework.ipynb', 'ML.Генерация переменных и Feature selection', '2026-08-02'),
     ('Темы/3. Машинное обучение и нейросети/03. Деревья решений/homework/homework.ipynb', 'Деревья решений (Decision Trees)', '2026-08-20', 'Классификация: прогнозирование одобрения кредита (train.csv)'),
     ('Темы/3. Машинное обучение и нейросети/04. Ансамблирование/homework/homework.ipynb', 'Ансамблирование', '2026-08-22', 'water_potability.csv: bagging, случайный лес, AdaBoost, Gradient Boosting, XGBoost, stacking'),
-    ('Темы/3. Машинное обучение и нейросети/12. Работа со сложными данными/homework/homework.ipynb', 'Работа со сложными данными (NLP)', '2026-09-12', 'SMS Spam Collection: preprocessing + TF-IDF + MultinomialNB (accuracy 0.9613, F1 0.8198)')
+    ('Темы/3. Машинное обучение и нейросети/12. Работа со сложными данными/homework/homework.ipynb', 'Работа со сложными данными (NLP)', '2026-09-12', 'SMS Spam Collection: preprocessing + TF-IDF + MultinomialNB (accuracy 0.9613, F1 0.8198)'),
+    ('Темы/4. Основы нейронных сетей/03. Введение в сверточные НС/homework.ipynb', 'Свёрточные нейронные сети (CNN)', '2026-10-08', 'CIFAR-10: обязательные задачи — Dense baseline (test_acc 0.4578), pocket CNN (test_acc 0.6022), большая CNN с аугментацией и Dropout (test_acc 0.7297, цель 80% не достигнута). Опциональные (оптимизаторы, BatchNormalization, batch_size, кривые обучения) пропущены.')
 ]
 
 for item in homeworks:
